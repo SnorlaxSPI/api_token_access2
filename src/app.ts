@@ -14,5 +14,5 @@ class Api {
 Api.getParams();
 
 app.listen(3333, () => {
-  console.log('🚀🚀 Server Started!')
+  console.log('🚀🚀 Server Started')
 });
