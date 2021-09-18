@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const app = express();
 
-class Api {
+class Company {
   static async getParams () {
     const company_id = 7;
     const clientKey = '8d43589baefb44ecaec31f7a944fc8cf';
@@ -11,7 +11,7 @@ class Api {
     console.log('Token de acesso:', response);
   }
 }
-Api.getParams();
+Company.getParams();
 
 app.listen(3333, () => {
   console.log('🚀🚀 Server Started!!')
