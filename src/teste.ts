@@ -1,26 +1,45 @@
-import express from 'express';
-import axios from 'axios';
+import express, { response } from "express";
+import axios from "axios";
 
 const app = express.json();
 
-const getUrl = 'https://api.mktzap.com.br/company/'
-const company_id = 7;
-const clientkey = '/token?clientKey=8d43589baefb44ecaec31f7a944fc8cf';
+export class Company {
+  static async getParams(clientKey: string) {
+    const accessToken = (
+      await axios.get(
+        `https://api.mktzap.com.br/company/7/token?clientKey=${clientKey}`
+      )
+    ).data;
 
-//axios
-//  .get(`${getUrl}${company_id}${clientkey}`)
-//  .then((response) => console.log(response.data))
-//  .catch(console.error)
+    return accessToken;
+  }
+}
 
-const getUrlProtocol = '/historycontact?protocol=:3385321314709';
-const varToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzE5ODQ4ODQsImV4cCI6MTYzMTk4ODQ4NH0.6Pi3Wfp0jGNMiaW5i1fTgXC6r7DG9Q3-YlYALlPDG_g';
+Company.getParams("8d43589baefb44ecaec31f7a944fc8cf").then(async (v) => {
+  let { accessToken } = v;
 
-axios
-  .get(`${getUrl}${company_id}${getUrlProtocol}`, {
-    headers: {
-      Authorization: 'Bearer ' + varToken,
-    }
-  })
-  .then((response) => console.log(response.data))
-  .catch(console.error)
-  
+  console.log(accessToken);
+
+  const urlComplete =
+    "https://api.mktzap.com.br/company/7/historycontact?updatedFrom=2021-04-29 09:18:20&updatedTo=2021-04-29 11:18:29";
+
+  let messages;
+
+  await axios
+    .get(`${urlComplete}`, {
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    })
+    .then((response) => {
+      let { status_id, messages_count } = response.data[0];
+
+      console.log(response.data);
+      console.log(status_id);
+
+      messages = messages_count;
+    })
+    .catch(console.error);
+
+  console.log(messages);
+});
