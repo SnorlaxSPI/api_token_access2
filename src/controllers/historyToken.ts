@@ -1,7 +1,8 @@
 import express, { response } from "express";
+import "../server";
 import axios from "axios";
 
-const app = express.json();
+const app = express();
 
 export class Company {
   static async getParams(clientKey: string) {
@@ -32,14 +33,17 @@ Company.getParams("8d43589baefb44ecaec31f7a944fc8cf").then(async (v) => {
       },
     })
     .then((response) => {
-      let { status_id, messages_count } = response.data[0];
+      let { status_id, messages_count, contact_id } = response.data[0];
 
       console.log(response.data);
-      console.log(status_id);
+      console.log("status_id:", status_id);
+      console.log("contact_id:", contact_id);
 
       messages = messages_count;
     })
     .catch(console.error);
 
-  console.log(messages);
+  console.log("messages_count:", messages);
 });
+
+export { app };
