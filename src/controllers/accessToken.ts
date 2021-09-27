@@ -20,5 +20,4 @@ Company.getParams("8d43589baefb44ecaec31f7a944fc8cf").then(async (v) => {
   let { accessToken } = v;
   console.log(accessToken);
 });
-
 export { app };
