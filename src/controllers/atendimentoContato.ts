@@ -6,13 +6,14 @@ Company.getParams("8d43589baefb44ecaec31f7a944fc8cf").then(async (v) => {
 
   //console.log(accessToken);
 
-  const urlComplete =
-    //"https://api.mktzap.com.br/company/7/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29";
-    //"https://api.mktzap.com.br/company/7/historycontact?protocol=7-2913805791518";
-    "https://api.mktzap.com.br/company/7/history/135362274/message";
+  //const urlComplete =
+  //"https://api.mktzap.com.br/company/7/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29";
+  //"https://api.mktzap.com.br/company/7/historycontact?protocol=7-2913805791518";
+  //  "https://api.mktzap.com.br/company/7/history/135362274/message";
 
   const urlWaWeb =
-    "https://api.mktzap.com.br/company/7/historycontact?contact_id=waweb_1977_5521983789745";
+    //"https://api.mktzap.com.br/company/7/historycontact?contact_id=waweb_1977_5514991775611";
+    "https://api.mktzap.com.br/company/7/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29";
 
   let messageAttendanceIds: any[] = [];
 
