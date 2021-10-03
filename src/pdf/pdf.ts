@@ -1,9 +1,11 @@
 import puppeteer from "puppeteer";
+import "../controllers/atendimentoContato";
+import { app } from "../controllers/atendimentoContato";
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto("https://www.google.com", {
+  await page.goto(`${``}`, {
     waitUntil: "networkidle2",
   });
 

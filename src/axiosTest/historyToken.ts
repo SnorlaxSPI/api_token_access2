@@ -1,6 +1,6 @@
 import axios from "axios";
 import { json } from "express";
-import { app, Company } from "./accessToken";
+import { app, Company } from "../controllers/accessToken";
 
 //const app = express();
 //
