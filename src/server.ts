@@ -1,7 +1,6 @@
-import express from "express";
-import { app } from "./controllers/atendimentoContato";
-//import "./controllers/atendimentoContato";
+//import { app } from "./controllers/accessToken";
+import { app2 } from "./controllers/atendimentoContato";
 
-app.listen(3333, () => {
+app2.listen(3333, () => {
   console.log("🚀🚀 Server Started!!");
 });
