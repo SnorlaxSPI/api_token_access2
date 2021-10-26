@@ -2,13 +2,13 @@ import dotenv from "dotenv";
 import express from "express";
 import axios from "axios";
 
-require("dotenv").config();
+dotenv.config();
 
 const app = express();
 
-const company_id = 7;
-const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
-const baseURL = `https://api.mktzap.com.br/company/${company_id}/token?clientKey=${clientKey}`;
+//const company_id = 7;
+//const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
+const baseURL = `https://api.mktzap.com.br/company/${process.env.company_id}/token?clientKey=${process.env.client_Key}`;
 
 export class Company {
   static async getParams(clientKey: string) {
@@ -18,7 +18,7 @@ export class Company {
   }
 }
 
-Company.getParams(clientKey).then(async (v) => {
+Company.getParams("process.env.client_Key").then(async (v) => {
   let { accessToken } = v;
   console.log(accessToken);
 });

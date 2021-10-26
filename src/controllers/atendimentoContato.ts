@@ -4,14 +4,15 @@ import { Company } from "./accessToken";
 
 const app2 = express();
 
-const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
+//const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
+//const company_id = 7;
+//const waweb = "waweb_1977_5514991775611";
 
-Company.getParams(clientKey).then(async (v) => {
+Company.getParams("process.env.client_Key").then(async (v) => {
   let { accessToken } = v;
 
-  const urlWaWeb =
-    "https://api.mktzap.com.br/company/7/historycontact?contact_id=waweb_1977_5514991775611";
-  //"https://api.mktzap.com.br/company/7/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29";
+  const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?contact_id=${process.env.waWeb}`;
+  //`https://api.mktzap.com.br/company/${company_id}/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29`;
 
   let messageAttendanceIds: any[] = [];
 
@@ -43,7 +44,7 @@ async function teste(messageAttendanceIds: any[], accessToken: string) {
   for (const messageAttendanceId of messageAttendanceIds) {
     await axios
       .get(
-        `https://api.mktzap.com.br/company/7/history/${messageAttendanceId}/message`,
+        `https://api.mktzap.com.br/company/${process.env.company_id}/history/${messageAttendanceId}/message`,
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -58,7 +59,8 @@ async function teste(messageAttendanceIds: any[], accessToken: string) {
           messages: Array(),
         };
         response.data.forEach((item: { history_id: any; message: any }) => {
-          obj2.messages.push(item.message);
+          var someEncodedString = Buffer.from(item.message, "utf-8").toString();
+          obj2.messages.push(someEncodedString);
         });
         obj.push(obj2);
       })

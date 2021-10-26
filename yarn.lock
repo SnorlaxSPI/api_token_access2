@@ -219,6 +219,11 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
+commander@^2.19.0:
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -325,6 +330,11 @@ escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
+
+escape-unicode@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/escape-unicode/-/escape-unicode-0.2.0.tgz#8c33e161a541ba944b75d93f79f15c8a7f419ed9"
+  integrity sha512-7jMQuKb8nm0h/9HYLfu4NCLFwoUsd5XO6OZ1z86PbKcMf8zDK1m7nFR0iA2CCShq4TSValaLIveE8T1UBxgALQ==
 
 etag@~1.8.1:
   version "1.8.1"
@@ -669,6 +679,15 @@ node-fetch@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+
+node-native2ascii@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/node-native2ascii/-/node-native2ascii-0.2.0.tgz#3602339db320bd87c50e9e06f16511759b165c67"
+  integrity sha512-xEPZJkdi/4+flqpYwwrRrdUTAtUhrJtAzgnUaikjhzbs4MdREU6B00Joig9POy/RWo7bwmFgR6tpv7oK7mlULw==
+  dependencies:
+    commander "^2.19.0"
+    escape-unicode "^0.2.0"
+    unescape-unicode "^0.2.0"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
@@ -1038,10 +1057,20 @@ unbzip2-stream@1.3.3:
     buffer "^5.2.1"
     through "^2.3.8"
 
+unescape-unicode@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/unescape-unicode/-/unescape-unicode-0.2.0.tgz#e70c8c99171d3ed6e4f08c220d3ac09b4639b07d"
+  integrity sha512-bcocfvlPFiZiFJBbImE16g1GTwMDKGSnz40Dlm6FzsZe7Fob7QA8iqIFwKesaub3L/MQ/U8KNIjyRbFWx4J8ug==
+
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
+
+utf8@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
+  integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
 
 util-deprecate@^1.0.1:
   version "1.0.2"
