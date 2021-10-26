@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import axios from "axios";
 import { Company } from "./accessToken";
 
@@ -59,7 +59,7 @@ async function teste(messageAttendanceIds: any[], accessToken: string) {
           messages: Array(),
         };
         response.data.forEach((item: { history_id: any; message: any }) => {
-          var someEncodedString = Buffer.from(item.message, "utf-8").toString();
+          var someEncodedString = JSON.parse(item.message); //Buffer.from(item.message, "utf-8").toString();
           obj2.messages.push(someEncodedString);
         });
         obj.push(obj2);
