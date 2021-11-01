@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import "../controllers/atendimentoContato";
-import { app } from "../controllers/atendimentoContato";
+import { app2 } from "../controllers/atendimentoContato";
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });

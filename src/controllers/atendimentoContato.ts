@@ -4,15 +4,11 @@ import { Company } from "./accessToken";
 
 const app2 = express();
 
-//const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
-//const company_id = 7;
-//const waweb = "waweb_1977_5514991775611";
-
 Company.getParams("process.env.client_Key").then(async (v) => {
   let { accessToken } = v;
 
-  const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?contact_id=${process.env.waWeb}`;
-  //`https://api.mktzap.com.br/company/${company_id}/historycontact?updatedFrom=2021-09-20 07:18:20&updatedTo=2021-09-27 14:18:29`;
+  //const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?contact_id=${process.env.waWeb}`;
+  const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?updatedFrom=2021-09-01 07:18:20&updatedTo=2021-10-01 14:18:29`;
 
   let messageAttendanceIds: any[] = [];
 
@@ -47,7 +43,6 @@ async function teste(messageAttendanceIds: any[], accessToken: string) {
         `https://api.mktzap.com.br/company/${process.env.company_id}/history/${messageAttendanceId}/message`,
         {
           headers: {
-            "Content-Type": "application/json; charset=utf-8",
             Authorization: "Bearer " + accessToken,
           },
         }

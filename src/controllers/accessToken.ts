@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 
 //const company_id = 7;
-//const clientKey = "8d43589baefb44ecaec31f7a944fc8cf";
+//const clientKey = "519d8b7dd3d84e629601bc3074b8fb5e";
 const baseURL = `https://api.mktzap.com.br/company/${process.env.company_id}/token?clientKey=${process.env.client_Key}`;
 
 export class Company {
