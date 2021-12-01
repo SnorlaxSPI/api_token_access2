@@ -2,15 +2,18 @@ import express, { json } from "express";
 import axios from "axios";
 import { Company } from "./accessToken";
 
+const { PDF } = require("../pdf/pdf2");
+
 const app2 = express();
 
 Company.getParams("process.env.client_Key").then(async (v) => {
   let { accessToken } = v;
 
   //const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?contact_id=${process.env.waWeb}`;
-  const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?updatedFrom=2021-09-01 07:18:20&updatedTo=2021-10-01 14:18:29`;
+  //const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?updatedFrom=2021-06-16 00:01:20&updatedTo=2021-06-17 23:59:29`;
+  const urlWaWeb = `https://api.mktzap.com.br/company/${process.env.company_id}/historycontact?createdTo=2021-06-17T02:59:06.000Z`;
 
-  let messageAttendanceIds: any[] = [];
+  let messages: any[] = [];
 
   await axios
     .get(`${urlWaWeb}`, {
@@ -21,26 +24,38 @@ Company.getParams("process.env.client_Key").then(async (v) => {
     .then((response) => {
       console.log(response.data);
 
-      response.data.forEach((item: { id: any }) => {
-        messageAttendanceIds.push(item.id);
+      response.data.forEach((item: { id: any; name: any; contact_id: any }) => {
+        let message = {
+          message_id: item.id,
+          name: item.name,
+          contact_id: item.contact_id,
+        };
+
+        messages.push(message);
       });
 
-      console.log(messageAttendanceIds);
+      console.log(messages);
     })
     .catch(console.error);
 
-  let objReturn = await teste(messageAttendanceIds, accessToken);
+  let objReturn = await teste({ messages, accessToken });
 
-  console.log(objReturn);
+  PDF.createPdf(objReturn);
 });
 
-async function teste(messageAttendanceIds: any[], accessToken: string) {
-  let obj: { messageId: { id: any }; messages: any[] }[] = [];
+async function teste({
+  messages,
+  accessToken,
+}: {
+  messages: any[];
+  accessToken: string;
+}) {
+  let resultMessages: { messageId: { id: any }; messages: any[] }[] = [];
 
-  for (const messageAttendanceId of messageAttendanceIds) {
+  for (const message of messages) {
     await axios
       .get(
-        `https://api.mktzap.com.br/company/${process.env.company_id}/history/${messageAttendanceId}/message`,
+        `https://api.mktzap.com.br/company/${process.env.company_id}/history/${message.message_id}/message`,
         {
           headers: {
             Authorization: "Bearer " + accessToken,
@@ -48,20 +63,23 @@ async function teste(messageAttendanceIds: any[], accessToken: string) {
         }
       )
       .then((response) => {
-        console.log(messageAttendanceId);
-        let obj2 = {
-          messageId: messageAttendanceId,
+        console.log(message);
+
+        let messageObject = {
+          messageId: message.message_id,
+          name: message.name,
+          contactId: message.contact_id,
           messages: Array(),
         };
         response.data.forEach((item: { history_id: any; message: any }) => {
           var someEncodedString = JSON.parse(item.message); //Buffer.from(item.message, "utf-8").toString();
-          obj2.messages.push(someEncodedString);
+          messageObject.messages.push(someEncodedString);
         });
-        obj.push(obj2);
+        resultMessages.push(messageObject);
       })
       .catch(console.error);
   }
-  return obj;
+  return resultMessages;
 }
 
 export { app2 };
