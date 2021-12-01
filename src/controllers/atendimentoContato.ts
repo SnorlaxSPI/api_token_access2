@@ -1,10 +1,12 @@
 import express, { json } from "express";
 import axios from "axios";
 import { Company } from "./accessToken";
-
+import {Pdf4} from '../pdf/Pdf4'
 const { PDF } = require("../pdf/pdf2");
 
 const app2 = express();
+
+const pdfCreate = new Pdf4();
 
 Company.getParams("process.env.client_Key").then(async (v) => {
   let { accessToken } = v;
@@ -40,7 +42,7 @@ Company.getParams("process.env.client_Key").then(async (v) => {
 
   let objReturn = await teste({ messages, accessToken });
 
-  PDF.createPdf(objReturn);
+  pdfCreate.createPdf(objReturn);
 });
 
 async function teste({

@@ -1,13 +1,15 @@
 import jsPDF from "jspdf";
 
-var fs = require("fs");
+import fs from"fs";
 
 const pdf = {
   async createPdf(messages: any) {
     console.log(messages);
 
-    var doc = new jsPDF();
-
+    var doc = new jsPDF("portrait", 'pt', 'a4');
+    doc.setFont('Courier')
+    doc.setFontSize(20)
+    
     let spce = 10;
     for (const message of messages) {
       doc.text(message.messageId.toString(), 10, spce);
