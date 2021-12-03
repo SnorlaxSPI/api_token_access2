@@ -26,10 +26,12 @@ Company.getParams("process.env.client_Key").then(async (v) => {
     .then((response) => {
       console.log(response.data);
 
-      response.data.forEach((item: { id: any; name: any; contact_id: any }) => {
+      response.data.forEach((item: { id: any; name: any; contact_id: any; protocol: any; first_message_at: any}) => {
         let message = {
           message_id: item.id,
+          protocol: item.protocol,
           name: item.name,
+          firstMessageAt: item.first_message_at,
           contact_id: item.contact_id,
         };
 
@@ -65,18 +67,22 @@ async function teste({
         }
       )
       .then((response) => {
-        console.log(message);
+        console.log(response.data);
 
         let messageObject = {
           messageId: message.message_id,
+          protocol: message.protocol,
+          firstMessageAt: message.firstMessageAt,
           name: message.name,
           contactId: message.contact_id,
           messages: Array(),
         };
-        response.data.forEach((item: { history_id: any; message: any }) => {
+        response.data.forEach((item: { history_id: any; message: any; created_at: any }) => {
           var someEncodedString = JSON.parse(item.message); //Buffer.from(item.message, "utf-8").toString();
-          messageObject.messages.push(someEncodedString);
+          messageObject.messages.push({createdAt: item.created_at, message: someEncodedString});
+
         });
+        console.log(messageObject)
         resultMessages.push(messageObject);
       })
       .catch(console.error);
